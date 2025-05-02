@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicVibe - Music Event Management</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/style/main.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-soundwave"></i>MusicVibe
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create-event.html">Create Event</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking-history.html">My Bookings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Find Your Perfect Music Event</h1>
+            <p class="lead mb-4">Discover concerts, festivals, and live performances happening near you</p>
+            <div class="search-box mx-auto mb-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search events...">
+                    <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="category-section py-4 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <button class="btn btn-outline-primary active">All</button>
+                        <button class="btn btn-outline-primary">Rock</button>
+                        <button class="btn btn-outline-primary">Jazz</button>
+                        <button class="btn btn-outline-primary">Pop</button>
+                        <button class="btn btn-outline-primary">Classical</button>
+                        <button class="btn btn-outline-primary">Electronic</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Events -->
+    <section class="featured-events py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Featured Events</h2>
+            <div class="row">
+                
+                <!-- Event Card 1 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status open">Open</div>
+                        <img src="static/img/rockfes.jpg" class="card-img-top" alt="Rock Concert">
+                        <div class="card-body">
+                            <h5 class="card-title">Summer Rock Festival</h5>
+                            <p class="card-text ">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                                <i class="bi bi-clock-fill  ms-3 me-2"></i>18:00 - 23:00
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <p class="card-text price"><i class="bi bi-cash me-2"></i>From $50</p>
+                            <a href="event-details.html" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event Card 2 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status sold-out">Sold Out</div>
+                        <img src="static/img/jazz.jpg" class="card-img-top" alt="Jazz Night">
+                        <div class="card-body">
+                            <h5 class="card-title">Jazz Night in the Park</h5>
+                            <p class="card-text ">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                                <i class="bi bi-clock-fill  ms-3 me-2"></i>18:00 - 23:00
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <p class="card-text price"><i class="bi bi-cash me-2"></i>From $50</p>
+                            <a href="#" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event Card 3 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status open">Open</div>
+                        <img src="static/img/pop.jpg" class="card-img-top" alt="Pop Concert">
+                        <div class="card-body">
+                            <h5 class="card-title">Pop Stars Live</h5>
+                            <p class="card-text ">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                                <i class="bi bi-clock-fill  ms-3 me-2"></i>18:00 - 23:00
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <p class="card-text price"><i class="bi bi-cash me-2"></i>From $50</p>
+                            <a href="#" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="upcoming-events py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Upcoming Events</h2>
+            <div class="row">
+                <!-- Event Card 4 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status open">Open</div>
+                        <img src="static/img/orche.jpg" class="card-img-top" alt="Classical Concert">
+                        <div class="card-body">
+                            <h5 class="card-title">Symphony Orchestra</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <a href="#" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event Card 5 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status cancelled">Cancelled</div>
+                        <img src="static/img/electronic.jpg" class="card-img-top" alt="Electronic Music">
+                        <div class="card-body">
+                            <h5 class="card-title">Electronic Music Festival</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <a href="#" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event Card 6 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status open">Open</div>
+                        <img src="static/img/rock.jpg" class="card-img-top" alt="Rock Band">
+                        <div class="card-body">
+                            <h5 class="card-title">Rock Band Reunion</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <a href="#" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event Card 7 -->
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status inactive">Inactive</div>
+                        <img src="static/img/kpop.jpg" class="card-img-top" alt="Folk Music">
+                        <div class="card-body">
+                            <h5 class="card-title">K-POP MAMA 2025</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event-fill me-2"></i>April 15, 2025
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>Riverside Arena</p>
+                            <a href="#" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <h5>MusicVibe</h5>                   
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="create-event.html" class="text-white">Create Event</a></li>
+                        <li><a href="booking-history.html" class="text-white">My Bookings</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 MusicVibe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
