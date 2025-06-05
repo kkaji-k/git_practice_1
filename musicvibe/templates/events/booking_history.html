@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}My Bookings - MusicVibe{% endblock %}
+
+{% block content %}
+<!-- My Bookings Section -->
+<section class="my-bookings-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="mb-0">My Bookings</h2>
+                    <span class="text-muted">{{ bookings|length }} booking(s)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookings List -->
+        <div class="row">
+            <div class="col-12">
+                {% if bookings %}
+                    {% for booking in bookings %}
+                    <div class="card booking-card mb-4">
+                        <div class="row g-0">
+                            <div class="col-md-3">
+                                <img src="{{ url_for('static', filename='img/' + booking.event.image) }}" class="img-fluid rounded-start booking-image" alt="{{ booking.event.name }}">
+                                <div class="event-status {{ booking.event.status.lower().replace(' ', '-') }} booking-status">{{ booking.event.status }}</div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h4 class="card-title mb-1">{{ booking.event.name }}</h4>
+                                        {% if booking.status == 'Confirmed' %}
+                                            {% if booking.event.status == 'Completed' %}
+                                                <span class="badge bg-secondary">Past Event</span>
+                                            {% else %}
+                                                <span class="badge bg-primary">Upcoming</span>
+                                            {% endif %}
+                                        {% elif booking.status == 'Cancelled' %}
+                                            <span class="badge bg-danger">Cancelled</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="booking-meta mb-3">
+                                        <div class="meta-item mb-1">
+                                            <i class="bi bi-calendar-event-fill me-2 text-primary"></i>
+                                            <span>Event Date: {{ booking.event.date.strftime('%B %d, %Y') }}</span>
+                                        </div>
+                                        <div class="meta-item mb-1">
+                                            <i class="bi bi-clock-fill me-2 text-primary"></i>
+                                            <span>Event Time: {{ booking.event.start_time.strftime('%H:%M') }} - {{ booking.event.end_time.strftime('%H:%M') }}</span>
+                                        </div>
+                                        <div class="meta-item mb-1">
+                                            <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+                                            <span>Venue: {{ booking.event.venue_name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-details card mb-3">
+                                        <div class="card-body py-2">
+                                            <div class="row">
+                                                <div class="col-md-3 mb-2 mb-md-0">
+                                                    <strong>Booking ID:</strong>
+                                                    <span class="text-secondary">{{ booking.booking_id }}</span>
+                                                </div>
+                                                <div class="col-md-3 mb-2 mb-md-0">
+                                                    <strong>Ticket Type:</strong>
+                                                    <span class="text-secondary">{{ booking.ticket_type }} Ticket</span>
+                                                </div>
+                                                <div class="col-md-3 mb-2 mb-md-0">
+                                                    <strong>Quantity:</strong>
+                                                    <span class="text-secondary">{{ booking.quantity }}</span>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <strong>Total Cost:</strong>
+                                                    <span class="text-secondary">${{ "%.2f"|format(booking.total_cost) }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="booking-footer d-flex justify-content-between align-items-center">
+                                        <div class="booking-date text-muted">
+                                            <small>Booked on: {{ booking.booking_date.strftime('%B %d, %Y at %H:%M') }}</small>
+                                        </div>
+                                        <div class="booking-actions">
+                                            <a href="{{ url_for('event.show', id=booking.event.id) }}" class="btn btn-sm btn-outline-primary me-2">View Event</a>
+                                            {% if booking.status == 'Confirmed' and booking.event.status not in ['Completed', 'Cancelled'] %}
+                                                <form method="POST" action="{{ url_for('event.cancel_booking', booking_id=booking.id) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to cancel this booking?')">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">Cancel Booking</button>
+                                                </form>
+                                            {% elif booking.event.status == 'Completed' %}
+                                                <button class="btn btn-sm btn-outline-secondary" disabled>Write Review</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- No Bookings Message -->
+                    <div class="text-center py-5">
+                        <i class="bi bi-ticket-perforated display-1 text-muted mb-3"></i>
+                        <h3>No Bookings Yet</h3>
+                        <p class="text-muted">You haven't booked any events yet. Browse our events and find something you love!</p>
+                        <a href="{{ url_for('main.index') }}" class="btn btn-primary">Browse Events</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

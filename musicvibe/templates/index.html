@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}MusicVibe - Find Your Perfect Music Event{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Find Your Perfect Music Event</h1>
+            <p class="lead mb-4">Discover concerts, festivals, and live performances happening near you</p>
+            <div class="search-box mx-auto mb-4">
+                <form action="{{ url_for('main.search') }}" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search events..." value="{{ search_term or '' }}">
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="category-section py-4 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{{ url_for('main.index') }}" class="btn btn-outline-primary {% if not selected_category %}active{% endif %}">All</a>
+                        <a href="{{ url_for('main.filter_by_category', category='rock') }}" class="btn btn-outline-primary {% if selected_category == 'rock' %}active{% endif %}">Rock</a>
+                        <a href="{{ url_for('main.filter_by_category', category='jazz') }}" class="btn btn-outline-primary {% if selected_category == 'jazz' %}active{% endif %}">Jazz</a>
+                        <a href="{{ url_for('main.filter_by_category', category='pop') }}" class="btn btn-outline-primary {% if selected_category == 'pop' %}active{% endif %}">Pop</a>
+                        <a href="{{ url_for('main.filter_by_category', category='classical') }}" class="btn btn-outline-primary {% if selected_category == 'classical' %}active{% endif %}">Classical</a>
+                        <a href="{{ url_for('main.filter_by_category', category='electronic') }}" class="btn btn-outline-primary {% if selected_category == 'electronic' %}active{% endif %}">Electronic</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Events -->
+    {% if featured_events %}
+    <section class="featured-events py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Featured Events</h2>
+            <div class="row">
+                {% for event in featured_events %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status {{ event.status.lower().replace(' ', '-') }}">{{ event.status }}</div>
+                        <img src="{{ url_for('static', filename='img/' + event.image) }}" class="card-img-top" alt="{{ event.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event-fill me-2"></i>{{ event.date.strftime('%B %d, %Y') }}
+                                <i class="bi bi-clock-fill ms-3 me-2"></i>{{ event.start_time.strftime('%H:%M') }} - {{ event.end_time.strftime('%H:%M') }}
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>{{ event.venue_name }}</p>
+                            <p class="card-text price"><i class="bi bi-cash me-2"></i>From ${{ "%.0f"|format(event.standard_price) }}</p>
+                            <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Upcoming Events -->
+    {% if upcoming_events %}
+    <section class="upcoming-events py-5 {% if featured_events %}bg-light{% endif %}">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">{% if not featured_events %}All Events{% else %}More Events{% endif %}</h2>
+            <div class="row">
+                {% for event in upcoming_events %}
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card event-card h-100">
+                        <div class="event-status {{ event.status.lower().replace(' ', '-') }}">{{ event.status }}</div>
+                        <img src="{{ url_for('static', filename='img/' + event.image) }}" class="card-img-top" alt="{{ event.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">
+                                <i class="bi bi-calendar-event-fill me-2"></i>{{ event.date.strftime('%B %d, %Y') }}
+                            </p>
+                            <p class="card-text venue"><i class="bi bi-geo-alt-fill me-2"></i>{{ event.venue_name }}</p>
+                            <a href="{{ url_for('event.show', id=event.id) }}" class="btn btn-primary stretched-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- No Events Message -->
+    {% if not featured_events and not upcoming_events %}
+    <section class="py-5">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <i class="bi bi-music-note-beamed display-1 text-muted mb-3"></i>
+                    <h3>No Events Found</h3>
+                    <p class="text-muted">{% if search_term %}No events match your search for "{{ search_term }}".{% elif selected_category %}No events found in the {{ selected_category }} category.{% else %}No events are currently available.{% endif %}</p>
+                    <a href="{{ url_for('main.index') }}" class="btn btn-primary">View All Events</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
